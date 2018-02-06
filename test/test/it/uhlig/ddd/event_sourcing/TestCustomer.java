@@ -21,17 +21,17 @@ public class TestCustomer
   {
   };
 
-  private List<CustomerEvent<? extends Object>> _events = new ArrayList<CustomerEvent<? extends Object>>();
+  private List<CustomerEvent<? extends Object>> _eventStore = new ArrayList<CustomerEvent<? extends Object>>();
 
   @Test
   public void testLock()
   {
     Customer customer = new Customer();
 
-    _events.add(new CustomerCreatedEvent(_customer, new Date()));
-    _events.add(new CustomerLockedEvent(_customer, new AtomicInteger(100)));
+    _eventStore.add(new CustomerCreatedEvent(_customer, new Date()));
+    _eventStore.add(new CustomerLockedEvent(_customer, new AtomicInteger(100)));
 
-    for (CustomerEvent<? extends Object> event : _events)
+    for (CustomerEvent<? extends Object> event : _eventStore)
       event.dispatch(customer);
 
     assertTrue(customer.isLocked());
@@ -40,13 +40,13 @@ public class TestCustomer
   @Test
   public void testLockUnlock()
   {
-    _events.add(new CustomerCreatedEvent(_customer, new Date()));
-    _events.add(new CustomerLockedEvent(_customer, new AtomicInteger(100)));
-    _events.add(new CustomerUnlockedEvent(_customer, "we forgive her"));
+    _eventStore.add(new CustomerCreatedEvent(_customer, new Date()));
+    _eventStore.add(new CustomerLockedEvent(_customer, new AtomicInteger(100)));
+    _eventStore.add(new CustomerUnlockedEvent(_customer, "we forgive her"));
 
     Customer customer = new Customer();
 
-    for (CustomerEvent<? extends Object> event : _events)
+    for (CustomerEvent<? extends Object> event : _eventStore)
       event.dispatch(customer);
 
     assertFalse(customer.isLocked());

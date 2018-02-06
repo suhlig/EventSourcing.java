@@ -1,10 +1,10 @@
 package it.uhlig.ddd.event_sourcing;
 
-public class CustomerUnlockedEvent extends Event<String>
+public class CustomerUnlockedEvent extends CustomerEvent<String>
 {
-  public CustomerUnlockedEvent(String string)
+  public CustomerUnlockedEvent(Identity<Customer> id, String string)
   {
-    super(string);
+    super(id, string);
   }
 
   @Override

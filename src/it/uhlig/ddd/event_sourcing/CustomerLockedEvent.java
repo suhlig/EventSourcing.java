@@ -1,10 +1,10 @@
 package it.uhlig.ddd.event_sourcing;
 
-public class CustomerLockedEvent extends Event<Object>
+public class CustomerLockedEvent extends CustomerEvent<Object>
 {
-  public CustomerLockedEvent(Object value)
+  public CustomerLockedEvent(Identity<Customer> id, Object value)
   {
-    super(value);
+    super(id, value);
   }
 
   @Override

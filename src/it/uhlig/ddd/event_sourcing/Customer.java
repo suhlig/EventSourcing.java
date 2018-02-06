@@ -11,23 +11,23 @@ public class Customer
     return _locked;
   }
 
-  void when(CustomerCreatedEvent f)
+  void when(CustomerCreatedEvent event)
   {
-    Date value = f.getValue();
-    System.out.println("Customer was created at " + value);
+    Date value = event.getValue();
+    System.out.println("Customer " + event.getCustomerID() + " was created at " + value);
   }
 
-  void when(CustomerLockedEvent f)
+  void when(CustomerLockedEvent event)
   {
-    Object value = f.getValue();
-    System.out.println("Customer was locked because of " + value + " unsuccessful login attempts");
+    Object value = event.getValue();
+    System.out.println("Customer " + event.getCustomerID() + " was locked because of " + value + " unsuccessful login attempts");
     _locked = true;
   }
 
-  void when(CustomerUnlockedEvent f)
+  void when(CustomerUnlockedEvent event)
   {
-    String value = f.getValue();
-    System.out.println("Customer was unlocked because " + value);
+    String value = event.getValue();
+    System.out.println("Customer " + event.getCustomerID() + " was unlocked because " + value);
     _locked = false;
   }
 }

@@ -2,11 +2,11 @@ package it.uhlig.ddd.event_sourcing;
 
 import java.util.Date;
 
-public class CustomerCreatedEvent extends Event<Date>
+public class CustomerCreatedEvent extends CustomerEvent<Date>
 {
-  public CustomerCreatedEvent(Date date)
+  public CustomerCreatedEvent(Identity<Customer> id, Date date)
   {
-    super(date);
+    super(id, date);
   }
 
   @Override
